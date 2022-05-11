@@ -4,7 +4,13 @@ import net.mamoe.mirai.console.command.CommandManager.INSTANCE.register
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.utils.info
+import org.echoosx.mirai.plugin.MirageConfig.cleanCron
 import org.echoosx.mirai.plugin.command.MirageCommand
+import org.echoosx.mirai.plugin.util.StorageClean
+import org.quartz.CronScheduleBuilder
+import org.quartz.JobBuilder
+import org.quartz.TriggerBuilder
+import org.quartz.impl.StdSchedulerFactory
 
 object MirageBuilder : KotlinPlugin(
     JvmPluginDescription(
@@ -19,5 +25,22 @@ object MirageBuilder : KotlinPlugin(
         logger.info { "MirageBuilder loaded" }
         MirageConfig.reload()
         MirageCommand.register()
+
+        val scheduler = StdSchedulerFactory.getDefaultScheduler()
+
+        val jobDetail = JobBuilder.newJob(StorageClean::class.java)
+//            .withIdentity("storage","Clean")
+            .build()
+
+        val trigger = TriggerBuilder.newTrigger()
+//            .withIdentity("clean","Clean")
+            .withSchedule(
+                CronScheduleBuilder.cronSchedule(cleanCron)
+            )
+            .startNow()
+            .build()
+
+        scheduler.scheduleJob(jobDetail,trigger)
+        scheduler.start()
     }
 }
