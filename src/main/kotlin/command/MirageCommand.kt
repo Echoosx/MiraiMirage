@@ -22,14 +22,21 @@ object MirageCommand:SimpleCommand(
     MirageBuilder,
     "mirage","幻影坦克", description = "制造幻影坦克"
 ) {
-    val ORIGIN_PATH = "Mirage/Origin"
-    val OUTPUT_PATH = "Mirage/Output"
+    private val ORIGIN_PATH = "Mirage/Origin"
+    private val OUTPUT_PATH = "Mirage/Output"
+    private val logger get() = MirageBuilder.logger
+
+    private val SupportImageTypes = listOf<String>("JPG","PNG")
 
     @Suppress("unused")
     @Handler
     suspend fun CommandSenderOnMessage<MessageEvent>.handle(scale_custom:String = "", light:String = "1-0.25", color:String = "0.5-0.7"){
         try {
             val outsideImage = this.fromEvent.getOrWaitImage("开始制作幻影坦克图！\n首先请发送『表图』:") ?: return
+            if(!SupportImageTypes.contains(outsideImage.imageType.name)) {
+                sendMessage("图片格式不支持！")
+                return
+            }
             HttpClient(OkHttp).use { client->
                 client.get<InputStream>(outsideImage.queryUrl()).use{
                     copyInputStreamToFile(it,File("${ORIGIN_PATH}/outside.jpg"))
@@ -42,11 +49,13 @@ object MirageCommand:SimpleCommand(
                     copyInputStreamToFile(it,File("${ORIGIN_PATH}/inside.jpg"))
                 }
             }
+            if(!SupportImageTypes.contains(insideImage.imageType.name)) {
+                sendMessage("图片格式不支持！")
+                return
+            }
 
+            // 获取里外图片宽度和高度比的较小值，在里外图片大小不一致时，以此比率放缩能保证外图不会产生黑边
             val ratio = Math.min((outsideImage.width * 1f / insideImage.width * 1f),(outsideImage.height *1f / insideImage.height * 1f))
-//        val scale = scale_custom.ifBlank {
-//            "1-${ratio}"
-//        }
 
             val scale = if(scale_custom.isBlank() || scale_custom=="default"){
                 "1-${ratio}"
