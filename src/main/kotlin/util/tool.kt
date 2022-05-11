@@ -8,8 +8,10 @@ import net.mamoe.mirai.message.data.MessageSource.Key.quote
 import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.firstIsInstanceOrNull
 import net.mamoe.mirai.message.nextMessage
+import org.echoosx.mirai.plugin.MirageBuilder
 import java.io.*
 
+private val logger get() = MirageBuilder.logger
 
 /**
  * 给String扩展 execute() 函数
@@ -79,5 +81,24 @@ fun copyInputStreamToFile(inputStream: InputStream, file: File) {
         while (inputStream.read(bytes).also { read = it } != -1) {
             outputStream.write(bytes, 0, read)
         }
+    }
+}
+
+// 如不存在则创建目录
+fun touchDir(destDirName: String): Boolean {
+    var destDirName = destDirName
+    val dir = File(destDirName)
+    if (dir.exists()) {
+        return false
+    }
+    if (!destDirName.endsWith(File.separator)) {
+        destDirName += File.separator
+    }
+    //创建目录
+    return if (dir.mkdirs()) {
+        true
+    } else {
+        logger.error("创建目录" + destDirName + "失败！")
+        false
     }
 }

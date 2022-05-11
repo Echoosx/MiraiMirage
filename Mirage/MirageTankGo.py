@@ -67,6 +67,7 @@ if __name__ == '__main__':
             color = argv['--color'].split('-')
             kwargs['whiteColor'] = float(color[0])
             kwargs['blackColor'] = float(color[1])
-            MTCore.color_car(whiteImg, blackImg).save(argv['OUTPUT'], 'PNG')
+            print(kwargs)
+            MTCore.color_car(whiteImg, blackImg,**kwargs).save(argv['OUTPUT'], 'PNG')
         else:
-            MTCore.gray_car(whiteImg, blackImg).save(argv['OUTPUT'], 'PNG')
+            MTCore.gray_car(whiteImg, blackImg,**kwargs).save(argv['OUTPUT'], 'PNG')

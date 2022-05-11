@@ -34,8 +34,8 @@ def resize_image(im1: Image.Image, im2: Image.Image, mode: str) -> Tuple[Image.I
 def gray_car(
     wimg: Image.Image,
     bimg: Image.Image,
-    wlight: float = 1.0,
-    blight: float = 0.3,
+    whiteLight: float = 1.0,
+    blackLight: float = 0.3,
     chess: bool = False,
 ) -> Image.Image:
     """
@@ -58,8 +58,8 @@ def gray_car(
         wpix[::2, ::2] = 255.0
         bpix[1::2, 1::2] = 0.0
 
-    wpix *= wlight
-    bpix *= blight
+    wpix *= whiteLight
+    bpix *= blackLight
 
     a = 1.0 - wpix / 255.0 + bpix / 255.0
     r = np.where(a != 0, bpix / a, 255.0)
@@ -75,10 +75,10 @@ def gray_car(
 def color_car(
     wimg: Image.Image,
     bimg: Image.Image,
-    wlight: float = 1.0,
-    blight: float = 0.18,
-    wcolor: float = 0.5,
-    bcolor: float = 0.7,
+    whiteLight: float = 1.0,
+    blackLight: float = 0.18,
+    whiteColor: float = 0.5,
+    blackColor: float = 0.7,
     chess: bool = False,
 ) -> Image.Image:
     """
@@ -92,8 +92,8 @@ def color_car(
     :param chess: 是否棋盘格化
     :return: 处理后的图像
     """
-    wimg = ImageEnhance.Brightness(wimg).enhance(wlight)
-    bimg = ImageEnhance.Brightness(bimg).enhance(blight)
+    wimg = ImageEnhance.Brightness(wimg).enhance(whiteLight)
+    bimg = ImageEnhance.Brightness(bimg).enhance(blackLight)
 
     wimg, bimg = resize_image(wimg, bimg, "RGB")
 
@@ -108,16 +108,16 @@ def color_car(
     bpix /= 255.
 
     wgray = wpix[:, :, 0] * 0.334 + wpix[:, :, 1] * 0.333 + wpix[:, :, 2] * 0.333
-    wpix *= wcolor
-    wpix[:, :, 0] += wgray * (1. - wcolor)
-    wpix[:, :, 1] += wgray * (1. - wcolor)
-    wpix[:, :, 2] += wgray * (1. - wcolor)
+    wpix *= whiteColor
+    wpix[:, :, 0] += wgray * (1. - whiteColor)
+    wpix[:, :, 1] += wgray * (1. - whiteColor)
+    wpix[:, :, 2] += wgray * (1. - whiteColor)
 
     bgray = bpix[:, :, 0] * 0.334 + bpix[:, :, 1] * 0.333 + bpix[:, :, 2] * 0.333
-    bpix *= bcolor
-    bpix[:, :, 0] += bgray * (1. - bcolor)
-    bpix[:, :, 1] += bgray * (1. - bcolor)
-    bpix[:, :, 2] += bgray * (1. - bcolor)
+    bpix *= blackColor
+    bpix[:, :, 0] += bgray * (1. - blackColor)
+    bpix[:, :, 1] += bgray * (1. - blackColor)
+    bpix[:, :, 2] += bgray * (1. - blackColor)
 
     d = 1. - wpix + bpix
 

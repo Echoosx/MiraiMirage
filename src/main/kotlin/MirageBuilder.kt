@@ -16,8 +16,8 @@ object MirageBuilder : KotlinPlugin(
     }
 ) {
     override fun onEnable() {
-        logger.info { "Plugin loaded" }
-        //配置文件目录 "${dataFolder.absolutePath}/"
+        logger.info { "MirageBuilder loaded" }
+        MirageConfig.reload()
         MirageCommand.register()
     }
 }
