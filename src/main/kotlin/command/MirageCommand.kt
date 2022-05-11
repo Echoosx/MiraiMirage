@@ -31,7 +31,7 @@ object MirageCommand:SimpleCommand(
     private val OUTPUT_PATH = "Mirage/Output"
     private val logger get() = MirageBuilder.logger
 
-    private val SupportImageTypes = listOf<String>("JPG","PNG")
+    private val SupportImageTypes = listOf("JPG","PNG","GIF")
 
     @Suppress("unused")
     @Handler
@@ -49,6 +49,9 @@ object MirageCommand:SimpleCommand(
                     copyInputStreamToFile(it,File("${ORIGIN_PATH}/${user!!.id}/${timestamp}_white.jpg"))
                 }
             }
+            if(outsideImage.imageType.name != "JPG"){
+                convertToJPG("${ORIGIN_PATH}/${user!!.id}/${timestamp}_white.jpg")
+            }
 
             val insideImage = this.fromEvent.getOrWaitImage("接下来请发送『里图』:") ?: return
             HttpClient(OkHttp).use { client->
@@ -59,6 +62,9 @@ object MirageCommand:SimpleCommand(
             if(!SupportImageTypes.contains(insideImage.imageType.name)) {
                 sendMessage("此图片格式不支持！")
                 return
+            }
+            if(insideImage.imageType.name != "JPG"){
+                convertToJPG("${ORIGIN_PATH}/${user!!.id}/${timestamp}_black.jpg")
             }
             touchDir("${OUTPUT_PATH}/${user!!.id}")
 

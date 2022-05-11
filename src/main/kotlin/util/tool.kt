@@ -9,7 +9,11 @@ import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.message.data.firstIsInstanceOrNull
 import net.mamoe.mirai.message.nextMessage
 import org.echoosx.mirai.plugin.MirageBuilder
+import java.awt.Color
+import java.awt.image.BufferedImage
 import java.io.*
+import javax.imageio.ImageIO
+
 
 private val logger get() = MirageBuilder.logger
 
@@ -100,5 +104,26 @@ fun touchDir(destDirName: String): Boolean {
     } else {
         logger.error("创建目录" + destDirName + "失败！")
         false
+    }
+}
+
+
+internal fun convertToJPG(imagePath:String){
+    val bufferedImage: BufferedImage
+    try {
+        //read image file
+        bufferedImage = ImageIO.read(File(imagePath))
+
+        // create a blank, RGB, same width and height, and a white background
+        val newBufferedImage = BufferedImage(bufferedImage.width,
+            bufferedImage.height, BufferedImage.TYPE_INT_RGB)
+
+        //TYPE_INT_RGB:创建一个RBG图像，24位深度，成功将32位图转化成24位
+        newBufferedImage.createGraphics().drawImage(bufferedImage, 0, 0, Color.WHITE, null)
+
+        // write to jpeg file
+        ImageIO.write(newBufferedImage, "jpg", File(imagePath))
+    } catch (e: IOException) {
+        e.printStackTrace()
     }
 }
