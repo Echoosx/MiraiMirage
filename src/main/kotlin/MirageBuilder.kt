@@ -16,7 +16,7 @@ object MirageBuilder : KotlinPlugin(
     JvmPluginDescription(
         id = "org.echoosx.mirai.plugin.mirage-builder",
         name = "mirage-builder",
-        version = "1.1.0"
+        version = "1.2.0"
     ) {
         author("Echoosx")
     }
@@ -29,11 +29,9 @@ object MirageBuilder : KotlinPlugin(
         val scheduler = StdSchedulerFactory.getDefaultScheduler()
 
         val jobDetail = JobBuilder.newJob(StorageClean::class.java)
-//            .withIdentity("storage","Clean")
             .build()
 
         val trigger = TriggerBuilder.newTrigger()
-//            .withIdentity("clean","Clean")
             .withSchedule(
                 CronScheduleBuilder.cronSchedule(cleanCron)
             )
