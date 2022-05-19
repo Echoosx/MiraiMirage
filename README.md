@@ -27,9 +27,9 @@
 
 ## 安装
 - 从 [Releases](https://github.com/Echoosx/MiraiMirage/releases) 下载`jar`包，放入根目录下的`plugins`文件夹
-- 从 [Releases](https://github.com/Echoosx/MiraiMirage/releases) 下载`Mirage.zip`，解压后放在根目录下
+- 从 [Releases](https://github.com/Echoosx/MiraiMirage/releases) 下载`Mirage.zip`，`解压后`放在工作目录下
 - 本插件使用了`Python`脚本，因此要准备好`Python`和`pip`环境
-- 在`根目录/Mirage`目录下，执行`pip install -r requirment.txt`安装好所需的第三方库
+- 在`工作目录/Mirage`目录下，执行`pip install -r requirment.txt`安装好所需的第三方库
 
 ## 配置
 ### setting.yml
