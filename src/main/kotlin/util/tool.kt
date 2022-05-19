@@ -3,6 +3,7 @@ package org.echoosx.mirai.plugin.util
 
 import kotlinx.coroutines.TimeoutCancellationException
 import net.mamoe.mirai.event.events.MessageEvent
+import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.MessageSource.Key.quote
 import net.mamoe.mirai.message.data.PlainText
@@ -63,7 +64,7 @@ fun Process.error():String{
 
 internal suspend fun MessageEvent.getOrWaitImage(msg: String): Image? {
     return (message.takeIf { m -> m.contains(Image) } ?: runCatching {
-        subject.sendMessage(msg)
+        subject.sendMessage(At(sender) + msg)
         nextMessage(30_000) { event -> event.message.contains(Image) }
     }.getOrElse { e ->
         when (e) {
@@ -89,8 +90,8 @@ fun copyInputStreamToFile(inputStream: InputStream, file: File) {
 }
 
 // 如不存在则创建目录
-fun touchDir(destDirName: String): Boolean {
-    var destDirName = destDirName
+fun touchDir(dirPath: String): Boolean {
+    var destDirName = dirPath
     val dir = File(destDirName)
     if (dir.exists()) {
         return false

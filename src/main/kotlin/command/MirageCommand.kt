@@ -26,7 +26,7 @@ object MirageCommand:SimpleCommand(
     private val INPUT_PATH = "Mirage/Input"
     private val OUTPUT_PATH = "Mirage/Output"
 
-    private val SupportImageTypes = listOf("JPG","PNG","GIF")
+//    private val SupportImageTypes = listOf("JPG","PNG","GIF")
 
     @Suppress("unused")
     @Handler
@@ -34,10 +34,11 @@ object MirageCommand:SimpleCommand(
         try {
             val timestamp = DateTimeFormatter.ofPattern("YYMMddHHmmss").format(LocalDateTime.now())
             val outsideImage = this.fromEvent.getOrWaitImage("开始制作幻影坦克图！\n首先请发送『表图』:") ?: return
-            if(!SupportImageTypes.contains(outsideImage.imageType.name)) {
-                sendMessage("此图片格式不支持！")
-                return
-            }
+//            MirageBuilder.logger.info(outsideImage.imageType.name)
+//            if(!SupportImageTypes.contains(outsideImage.imageType.name)) {
+//                sendMessage(At(sender) + "此图片格式不支持！")
+//                return
+//            }
             touchDir("${INPUT_PATH}/${user!!.id}")
             HttpClient(OkHttp).use { client->
                 client.get<InputStream>(outsideImage.queryUrl()).use{
@@ -49,15 +50,16 @@ object MirageCommand:SimpleCommand(
             }
 
             val insideImage = this.fromEvent.getOrWaitImage("接下来请发送『里图』:") ?: return
+            MirageBuilder.logger.info(outsideImage.imageType.name)
             HttpClient(OkHttp).use { client->
                 client.get<InputStream>(insideImage.queryUrl()).use{
                     copyInputStreamToFile(it,File("${INPUT_PATH}/${user!!.id}/${timestamp}_black.jpg"))
                 }
             }
-            if(!SupportImageTypes.contains(insideImage.imageType.name)) {
-                sendMessage("此图片格式不支持！")
-                return
-            }
+//            if(!SupportImageTypes.contains(insideImage.imageType.name)) {
+//                sendMessage(At(sender) + "此图片格式不支持！")
+//                return
+//            }
             if(insideImage.imageType.name != "JPG"){
                 convertToJPG("${INPUT_PATH}/${user!!.id}/${timestamp}_black.jpg")
             }

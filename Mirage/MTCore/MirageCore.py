@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from ast import Return, arg
 import time
 from typing import Callable, Tuple
 
@@ -144,41 +143,6 @@ def resize_image(im1: Image.Image, im2: Image.Image, mode: str) -> Tuple[Image.I
     bimg.paste(_bimg, ((width - bwidth) // 2, (height - bheight) // 2))
 
     return wimg, bimg
-
-# def build(source_x: str, source_y: str, target_name: str, shrink: float = 1):
-#     """
-#     Build a 'mirage tank' image from [source_x] and [source_y]
-
-#     (Assuming [source_x] and [source_y] have the same size)
-
-#     :param source_x: name of the image shown on white background
-#     :param source_y: name of the image shown on black background
-#     :param target_name: name of the image to be saved
-#     :param shrink: size change comparing to the source image
-#     """
-#     print("start process")
-#     img_a = cv2.cvtColor(
-#         cv2.imread(source_x, cv2.IMREAD_UNCHANGED),
-#         cv2.COLOR_BGR2RGB
-#     )
-#     img_b = cv2.cvtColor(
-#         cv2.imread(source_y, cv2.IMREAD_UNCHANGED),
-#         cv2.COLOR_BGR2RGB
-#     )
-#     height, width, _ = img_a.shape
-#     height = int(height * shrink)
-#     width = int(width * shrink)
-#     img_a = invert(
-#         adjust_lightness(desaturate(cv2.resize(img_a, (width, height))), 0.5)
-#     )
-#     img_b = adjust_lightness(
-#         desaturate(cv2.resize(img_b, (width, height))), -0.5
-#     )
-#     linear_dodged = linear_dodge_blend(img_a, img_b)
-#     divided = divide_blend(linear_dodged, img_b)
-#     cv2.imwrite(target_name, add_mask(divided, linear_dodged))
-#     print("finished")
-
 
 def build(whiteImg: Image, blackImg: Image, target_name: str, shrink: float = 1):
     """

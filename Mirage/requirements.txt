@@ -1,0 +1,5 @@
+docopt==0.6.2
+numba==0.55.1
+numpy==1.21.5
+opencv_python==4.5.5.64
+Pillow==9.1.1
