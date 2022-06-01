@@ -16,4 +16,5 @@ repositories {
 
 dependencies{
     implementation("org.quartz-scheduler:quartz:2.3.2")
+    implementation("com.google.android:android:4.1.1.4")
 }
