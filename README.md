@@ -23,7 +23,7 @@
 
 | 指令          | 描述          | 权限名称                                                |
 |:------------|:------------|:----------------------------------------------------|
-| `/<mirage>` | 生成今日收集到的词云  | `org.echoosx.mirai.plugin.mirage-builder:command.mirage` |
+| `/<mirage>` | 生成幻影坦克图（交互命令）  | `org.echoosx.mirai.plugin.mirage-builder:command.mirage` |
 
 ## 安装
 - 从 [Releases](https://github.com/Echoosx/MiraiMirage/releases) 下载`jar`包，放入根目录下的`plugins`文件夹
