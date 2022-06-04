@@ -7,13 +7,18 @@
 [![Downloads](https://img.shields.io/github/downloads/Echoosx/MiraiMirage/total)](https://github.com/Echoosx/MiraiMirage/releases)
 
 ## 功能
-生成`幻影坦克图`<br/>
-不了解`幻影坦克图`的可以先浏览 [此介绍](https://samarium150.github.io/mirage-tank-images/)
+生成`幻影坦克图`，不了解`幻影坦克图`的可以先浏览 [此介绍](https://samarium150.github.io/mirage-tank-images/)
 
-<img src="demo/demo_1.png" style="width:30%"/><br/>
+### 指令交互
+<img src="demo/demo_1.png" style="width:30%"/>
+
+### 幻影坦克示例
 <img src="demo/demo_2.gif" style="width:50%"/>
 
+### 自适应大小
+表图和里图的大小可以不同，生成时会自动缩放，逻辑如下：
 
+<img src="demo/demo_3.png" style="width:50%"/>
 
 ## 指令
 注意: 使用前请确保可以 [在聊天环境执行指令](https://github.com/project-mirai/chat-command) <br/>

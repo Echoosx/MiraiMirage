@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.serialization") version kotlinVersion
 
-    id("net.mamoe.mirai-console") version "2.10.0"
+    id("net.mamoe.mirai-console") version "2.11.0"
 }
 
 group = "org.echoosx"
@@ -16,6 +16,5 @@ repositories {
 
 dependencies{
     implementation("org.quartz-scheduler:quartz:2.3.2")
-    implementation("com.google.android:android:4.1.1.4")
     testImplementation(kotlin("test"))
 }
