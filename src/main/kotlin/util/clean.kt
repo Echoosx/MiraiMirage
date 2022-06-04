@@ -1,7 +1,7 @@
 package org.echoosx.mirai.plugin.util
 
-import com.mchange.io.FileUtils
 import org.echoosx.mirai.plugin.MirageBuilder
+import org.echoosx.mirai.plugin.MirageBuilder.dataFolder
 import org.quartz.Job
 import org.quartz.JobExecutionContext
 import org.quartz.JobExecutionException
@@ -22,9 +22,9 @@ internal class StorageClean:Job{
         val dateStr = dateFormat.format(date)
 
         // 工作内容
-        File("Mirage/Origin").deleteRecursively()
-        File("Mirage/Output").deleteRecursively()
+        File("${dataFolder.absolutePath}/Mirage/Input").deleteRecursively()
+        File("${dataFolder.absolutePath}/Mirage/Output").deleteRecursively()
 
-        logger.info("MirageBuilder清理暂存 执行时间：$dateStr")
+        logger.info("MirageBuilder清理缓存 执行时间：$dateStr")
     }
 }
