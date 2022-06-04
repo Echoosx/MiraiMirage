@@ -1,35 +1,35 @@
 # Mirai-Mirage
 
-> 基于 [Mirai Console](https://github.com/mamoe/mirai-console) 的幻影坦克图生成插件
+> 基于 [Mirai Console](https://github.com/mamoe/mirai-console) 的 “幻影坦克图” 生成插件
 
 [![Release](https://img.shields.io/github/v/release/Echoosx/MiraiMirage)](https://github.com/Echoosx/MiraiMirage/releases)
 [![Build](https://github.com/Echoosx/MiraiMirage/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=master)](https://github.com/Echoosx/MiraiMirage/actions/workflows/gradle.yml)
-
+[![Downloads](https://img.shields.io/github/downloads/Echoosx/MiraiMirage/total)](https://github.com/Echoosx/MiraiMirage/releases)
 
 ## 功能
-交互式生成`幻影坦克图`
+生成`幻影坦克图`，不了解`幻影坦克图`的可以先浏览 [此介绍](https://samarium150.github.io/mirage-tank-images/)
 
-不了解`幻影坦克图`的可以先浏览此[介绍](https://samarium150.github.io/mirage-tank-images/) <br/>
-在此鸣谢 [Samarium](https://github.com/Samarium150) 大佬提供的 [生成原理](https://github.com/Samarium150/mirage-tank-images)
+### 指令交互
+<img src="demo/demo_1.png" style="width:30%"/>
 
+### 幻影坦克示例
+<img src="demo/demo_2.gif" style="width:50%"/>
+
+### 自适应大小
+表图和里图的大小可以不同，生成时会自动缩放，逻辑如下：
+
+<img src="demo/demo_3.png" style="width:50%"/>
 
 ## 指令
-注意: 使用前请确保可以 [在聊天环境执行指令](https://github.com/project-mirai/chat-command)  
-带括号的`/`前缀是缺省的  
+注意: 使用前请确保可以 [在聊天环境执行指令](https://github.com/project-mirai/chat-command) <br/>
 `<...>`中的是指令名，由`｜`隔开表示其中任一名称都可执行  
 `[...]`表示参数，当`[...]`后面带`?`时表示参数可选  
 `{...}`表示连续的多个参数
 
 
-| 指令          | 描述          | 权限名称                                                |
-|:------------|:------------|:----------------------------------------------------|
-| `/<mirage>` | 生成幻影坦克图（交互命令）  | `org.echoosx.mirai.plugin.mirage-builder:command.mirage` |
-
-## 安装
-- 从 [Releases](https://github.com/Echoosx/MiraiMirage/releases) 下载`jar`包，放入根目录下的`plugins`文件夹
-- 从 [Releases](https://github.com/Echoosx/MiraiMirage/releases) 下载`Mirage.zip`，`解压后`放在工作目录下
-- 本插件使用了`Python`脚本，因此要准备好`Python`和`pip`环境
-- 在`工作目录/Mirage`目录下，执行`pip install -r requirment.txt`安装好所需的第三方库
+| 指令                | 描述      | 指令权限名                                                    |
+|:------------------|:--------|:---------------------------------------------------------|
+| `/<mirage｜幻影坦克 >` | 生成幻影坦克图 | `org.echoosx.mirai.plugin.mirage-builder:command.mirage` |
 
 ## 配置
 ### setting.yml
@@ -37,4 +37,12 @@
 # 定期清理存储的时间(Cron表达式，默认每周一0点清理)
 cleanCron: '0 0 0 ? * MON'
 ```
+cron表达式的格式可以参考：https://www.bejson.com/othertools/cron/
 
+## 安装
+- 从 [Releases](https://github.com/Echoosx/MiraiMirage/releases) 下载`jar`包，放入根目录下的`plugins`文件夹
+- 如果没有`plugins`文件夹，先运行 [Mirai Console](https://github.com/mamoe/mirai-console) ，会自动生成
+
+## 参考项目
+- [HYTank](https://github.com/wsgaowxh/HYTank)
+- [mirage-tank-images](https://github.com/Samarium150/mirage-tank-images)
