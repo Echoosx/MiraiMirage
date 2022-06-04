@@ -5,6 +5,7 @@
 [![Release](https://img.shields.io/github/v/release/Echoosx/MiraiMirage)](https://github.com/Echoosx/MiraiMirage/releases)
 [![Build](https://github.com/Echoosx/MiraiMirage/workflows/Java%20CI%20with%20Gradle/badge.svg?branch=master)](https://github.com/Echoosx/MiraiMirage/actions/workflows/gradle.yml)
 [![Downloads](https://img.shields.io/github/downloads/Echoosx/MiraiMirage/total)](https://github.com/Echoosx/MiraiMirage/releases)
+[![MiraiForum](https://img.shields.io/badge/post-on%20MiraiForum-yellow)](https://mirai.mamoe.net/topic/1273)
 
 ## 功能
 生成`幻影坦克图`，不了解`幻影坦克图`的可以先浏览 [此介绍](https://samarium150.github.io/mirage-tank-images/)
