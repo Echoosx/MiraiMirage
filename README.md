@@ -9,8 +9,10 @@
 ## 功能
 生成`幻影坦克图`<br/>
 不了解`幻影坦克图`的可以先浏览 [此介绍](https://samarium150.github.io/mirage-tank-images/)
-![指令交互](demo/demo_1.png)
-![幻影坦克](demo/demo_2.gif)
+
+<img src="demo/demo_1.png" style="width:30%"/><br/>
+<img src="demo/demo_2.gif" style="width:50%"/>
+
 
 
 ## 指令
