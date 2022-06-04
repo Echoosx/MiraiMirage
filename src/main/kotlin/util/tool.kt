@@ -3,7 +3,6 @@ package org.echoosx.mirai.plugin.util
 
 import kotlinx.coroutines.TimeoutCancellationException
 import net.mamoe.mirai.event.events.MessageEvent
-import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.MessageSource.Key.quote
 import net.mamoe.mirai.message.data.PlainText
@@ -20,7 +19,7 @@ internal val logger get() = MirageBuilder.logger
 
 internal suspend fun MessageEvent.getOrWaitImage(msg: String): Image? {
     return (message.takeIf { m -> m.contains(Image) } ?: runCatching {
-        subject.sendMessage(At(sender) + msg)
+        subject.sendMessage(msg)
         nextMessage(60_000) { event -> event.message.contains(Image) }
     }.getOrElse { e ->
         when (e) {
