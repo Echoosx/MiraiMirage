@@ -28,9 +28,11 @@
 `{...}`表示连续的多个参数
 
 
-| 指令                | 描述      | 指令权限名                                                    |
+| 指令                | 描述      | 指令权限id                                                    |
 |:------------------|:--------|:---------------------------------------------------------|
 | `/<mirage｜幻影坦克 >` | 生成幻影坦克图 | `org.echoosx.mirai.plugin.mirage-builder:command.mirage` |
+
+赋予指令权限的操作请参考 [PermissionCommand](https://github.com/mamoe/mirai/blob/dev/mirai-console/docs/BuiltInCommands.md#permissioncommand)
 
 ## 配置
 ### setting.yml
