@@ -16,7 +16,7 @@ object MirageBuilder : KotlinPlugin(
     JvmPluginDescription(
         id = "org.echoosx.mirai.plugin.mirage-builder",
         name = "mirage-builder",
-        version = "2.0.0"
+        version = "2.0.1"
     ) {
         author("Echoosx")
     }
