@@ -94,34 +94,58 @@ object MirageUtils {
         if((topWidth == bottomWidth) && (topHeight == bottomHeight)){
             targetList.add(targetTop)
             targetList.add(targetBottom)
-        }else {
+        }else{
             val scaleRatio = min(
                 ((topWidth * 1f)/(bottomWidth * 1f)),
                 ((topHeight * 1f)/(bottomHeight * 1f))
             )
-            val scaledWidth = (targetBottom.width * scaleRatio).toInt()
-            val scaledHeight = (targetBottom.height * scaleRatio).toInt()
-            val scaleBottom = targetBottom.getScaledInstance(
-                scaledWidth,
-                scaledHeight,
-                Image.SCALE_DEFAULT
-            )
-            val resultBottom = BufferedImage(topWidth, topHeight, BufferedImage.TYPE_INT_ARGB)
-            val graphics = resultBottom.createGraphics()
-            graphics.drawImage(
-                scaleBottom,
-                (topWidth-scaledWidth) / 2,
-                (topHeight-scaledHeight) / 2,
-                null
-            )
-            graphics.dispose()
+            if(topWidth * topHeight > bottomWidth * bottomHeight){
+                val scaledWidth = (targetBottom.width * scaleRatio).toInt()
+                val scaledHeight = (targetBottom.height * scaleRatio).toInt()
+                val scaleBottom = targetBottom.getScaledInstance(
+                    scaledWidth,
+                    scaledHeight,
+                    Image.SCALE_DEFAULT
+                )
+                val resultBottom = BufferedImage(topWidth, topHeight, BufferedImage.TYPE_INT_ARGB)
+                val graphics = resultBottom.createGraphics()
+                graphics.drawImage(
+                    scaleBottom,
+                    (topWidth-scaledWidth) / 2,
+                    (topHeight-scaledHeight) / 2,
+                    null
+                )
+                graphics.dispose()
 
-            targetList.add(targetTop)
-            targetList.add(resultBottom)
+                targetList.add(targetTop)
+                targetList.add(resultBottom)
+            }else{
+                val scaledWidth = (targetTop.width / scaleRatio).toInt()
+                val scaledHeight = (targetTop.height / scaleRatio).toInt()
+                val scaleTop = targetTop.getScaledInstance(scaledWidth,scaledHeight,Image.SCALE_DEFAULT)
+                val resultBottom = BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_INT_ARGB)
+                val graphics = resultBottom.createGraphics()
+                graphics.drawImage(
+                    targetBottom,
+                    (scaledWidth-bottomWidth) / 2,
+                    (scaledHeight-bottomHeight) / 2,
+                    null
+                )
+                graphics.dispose()
+                targetList.add(image2BufferedImage(scaleTop,scaledWidth,scaledHeight))
+                targetList.add(resultBottom)
+            }
         }
         return targetList
     }
 
+    private fun image2BufferedImage(image:Image,width:Int,height:Int):BufferedImage{
+        val resultBuffered = BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB)
+        val graphics = resultBuffered.createGraphics()
+        graphics.drawImage(image,0,0,null)
+        graphics.dispose()
+        return resultBuffered
+    }
     //去色
     private fun setGray(target: BufferedImage) {
         val width = target.width
